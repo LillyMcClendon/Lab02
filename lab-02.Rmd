@@ -1,7 +1,7 @@
 ---
 title: "Lab 02 - Plastic waste"
-author: "Insert your name here"
-date: "Insert date here"
+author: "Lilly McClendon"
+date: "2025-01-23"
 output: github_document
 ---
 
@@ -19,21 +19,58 @@ plastic_waste <- read.csv("data/plastic-waste.csv")
 
 ### Exercise 1
 
-Remove this text, and add your answer for Exercise 1 here.
-
 ```{r plastic-waste-continent}
-# insert code here
+ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
+  geom_histogram(binwidth = 0.2)
 ```
+```{r country-waste-over-3.5}
+plastic_waste %>%
+  filter(plastic_waste_per_cap > 3.5)
+```
+##### Factors related to high plastic waste per capita in Trinidad and Tobago
+According to Kanhai and colleagues in 2024, individuals in Trinidad and Tobago use plastics because of their affordable price, need, little belief that they can change their behavior, and convenience. Additionally, Kanhai and colleagues in 2024 found factors such as social norms and convenience are predictors for single-use plastics. Further, even with increasing awareness of recycling, only half of people recycled, potentially due to inaccessibility of recycling. 
+
+#### 1.1 histogram plot of distribution of plastic waster per capita faceted by continent
+
+```{r histogram-plastic-waste-percap-facet-by-country}
+ggplot(plastic_waste, aes(x=plastic_waste_per_cap)) +
+  geom_histogram() +
+  facet_wrap(~continent)
+```
+
+#### Continent comparison of plastic waster per capita
+Surprisingly it seems like the continents all share similar patterns except for South America which appears to have a drastically smaller plastic waste per capita. 
 
 ### Exercise 2
 
-```{r plastic-waste-density}
-# insert code here
+```{r visualizing numerical data density plots }
+ggplot(data = plastic_waste,aes(x = plastic_waste_per_cap, shape = continent)) +
+  geom_density()
 ```
 
-### Exercise 3
+```{r desnity curve continents color coded}
+ggplot(data = plastic_waste, mapping = aes(x = plastic_waste_per_cap, color = continent)) +
+  geom_density()
+```
 
-Remove this text, and add your answer for Exercise 3 here.
+
+```{r density curve continents fill colored}
+ggplot(data = plastic_waste, mapping = aes(x = plastic_waste_per_cap, color = continent, fill = continent)) +
+  geom_density()
+```
+
+#### 2.1 Desnity Plots with different Alphas 
+```{r density curve continents fill colored transparency}
+ggplot(data = plastic_waste, mapping = aes(x = plastic_waste_per_cap, color = continent, fill = continent)) +
+  geom_density(alpha = .25)
+```
+
+#### 2.1 Definition of color and fill by mapping aesthetics and definition of alpha levels as characteristic of plotting geom. 
+
+We defined color and fill as mapping aesthetics because we wanted the color and fill to be based on the values of a variable in the data, in this case continent. We defined alpha levels as characteristics of plotting geom because we wanted to modify how transparent the points were from 0-totally transparent to 1-totally solid. The alpha values were therefore not based on the values of a variable in the data so we defined the alpha level as a characteristic of the plotting geom.
+
+
+### Exercise 3
 
 ```{r plastic-waste-violin}
 # insert code here
@@ -66,5 +103,10 @@ Remove this text, and add your answer for Exercise 5 here.
 ```{r recreate-viz}
 # insert code here
 ```
+
+
+### References
+
+Kanhai, L. D. K., Keller, E., & Richter, I. (2024). The human dimension of plastic pollution in the Caribbean SIDS of Trinidad and Tobago. Environmental Science & Policy, 159, 103820-. https://doi.org/10.1016/j.envsci.2024.103820
 
 
