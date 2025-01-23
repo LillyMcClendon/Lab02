@@ -72,13 +72,28 @@ We defined color and fill as mapping aesthetics because we wanted the color and 
 
 ### Exercise 3
 
-```{r plastic-waste-violin}
-# insert code here
+```{r visualize plastic data side-by-side box plots}
+ggplot(data = plastic_waste,mapping = aes(x = continent, y = plastic_waste_per_cap), title ) +
+  geom_boxplot()
 ```
 
-### Exercise 4
 
-Remove this text, and add your answer for Exercise 4 here.
+
+
+#### 3.1 Convert side-by-side box plots to violin plots
+
+```{r plastic-waste-violin}
+ggplot(plastic_waste, aes(x = continent, y=plastic_waste_per_cap))+
+  geom_violin()
+```
+
+#### Violin plots compared to box plots 
+In addition to reflecting summary statistics like the box plots, a unique feature of violin plots is that you can see the density of each variable (similar to a flipped histogram). Rather than showing bars to represent the data, the distribution itself is plotted turned. So if you look at the violin plot of South America you can see that the data is densest near the 0 plastic waste per capita.        
+
+#### Features of box plots not displayed in violin plots 
+In contrast to violin plots, box plots display the specific values of the summary statistics like the quartiles, median, and clearly distinguish outliers. The line inside the box represents the median value, and the bottom horizontal edge of the box represents the first quartile and the top horizontal edge of the box represents the third quartile.     
+
+### Exercise 4
 
 ```{r plastic-waste-mismanaged}
 # insert code here
