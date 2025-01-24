@@ -21,7 +21,8 @@ plastic_waste <- read.csv("data/plastic-waste.csv")
 
 ```{r plastic-waste-continent}
 ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
-  geom_histogram(binwidth = 0.2)
+  geom_histogram(binwidth = 0.2) + 
+  labs(title = "Plastic waste per capita in 2010")
 ```
 ```{r country-waste-over-3.5}
 plastic_waste %>%
@@ -35,7 +36,8 @@ According to Kanhai and colleagues in 2024, individuals in Trinidad and Tobago u
 ```{r histogram-plastic-waste-percap-facet-by-country}
 ggplot(plastic_waste, aes(x=plastic_waste_per_cap)) +
   geom_histogram() +
-  facet_wrap(~continent)
+  facet_wrap(~continent) +
+  labs(title = "Plastic waste per capita by country")
 ```
 
 ##### Continent comparison of plastic waster per capita
@@ -43,26 +45,40 @@ Surprisingly it seems like the continents all share similar patterns except for 
 
 ### Exercise 2
 
+#### Density plots 
 ```{r visualizing numerical data density plots }
-ggplot(data = plastic_waste,aes(x = plastic_waste_per_cap, shape = continent)) +
-  geom_density()
+ggplot(data = plastic_waste, aes(x = plastic_waste_per_cap)) +
+  geom_density() + 
+  labs(title = "Plastic waste per capita by continent")
 ```
+
+
+```{r visualizing numerical data density plots all continents }
+ggplot(data = plastic_waste,aes(x = plastic_waste_per_cap, shape = continent)) +
+  geom_density() + 
+  labs(title = "Plastic waste per capita by continent")
+```
+
+#### Density plots color coded by continent
 
 ```{r desnity curve continents color coded}
 ggplot(data = plastic_waste, mapping = aes(x = plastic_waste_per_cap, color = continent)) +
-  geom_density()
+  geom_density() + 
+  labs(title = "Plastic waste per capita by continent")
 ```
 
-
+#### Density plots filled curves
 ```{r density curve continents fill colored}
 ggplot(data = plastic_waste, mapping = aes(x = plastic_waste_per_cap, color = continent, fill = continent)) +
-  geom_density()
+  geom_density() + 
+  labs(title = "Plastic waste per capita by continent")
 ```
 
 #### 2.1 Desnity Plots with different Alphas 
 ```{r density curve continents fill colored transparency}
 ggplot(data = plastic_waste, mapping = aes(x = plastic_waste_per_cap, color = continent, fill = continent)) +
-  geom_density(alpha = .25)
+  geom_density(alpha = .25) + 
+  labs(title = "Plastic waste per capita by continent")
 ```
 
 ##### 2.1 Definition of color and fill by mapping aesthetics and definition of alpha levels as characteristic of plotting geom. 
@@ -73,8 +89,9 @@ We defined color and fill as mapping aesthetics because we wanted the color and 
 ### Exercise 3
 
 ```{r visualize plastic data side-by-side box plots}
-ggplot(data = plastic_waste,mapping = aes(x = continent, y = plastic_waste_per_cap), title ) +
-  geom_boxplot()
+ggplot(data = plastic_waste,mapping = aes(x = continent, y = plastic_waste_per_cap)) +
+  geom_boxplot() + 
+  labs(title = "Plastic waste per capita vs. continent")
 ```
 
 
@@ -83,7 +100,8 @@ ggplot(data = plastic_waste,mapping = aes(x = continent, y = plastic_waste_per_c
 
 ```{r plastic-waste-violin}
 ggplot(plastic_waste, aes(x = continent, y=plastic_waste_per_cap))+
-  geom_violin()
+  geom_violin() + 
+  labs(title = "Plastic waste per capita vs. continent")
 ```
 
 ##### Violin plots compared to box plots 
@@ -94,10 +112,11 @@ In contrast to violin plots, box plots display the specific values of the summar
 
 ### Exercise 4
 
-#### 4.1 Visualize relationship between plastic waste per capita and mismanaged plastic waste per capital with a scatterplot
+#### 4.1 Visualize relationship between plastic waste per capita and mismanaged plastic waste per capita with a scatterplot
 ```{r plastic-waste-mismanaged-scatterplot}
 ggplot(plastic_waste, aes(x = mismanaged_plastic_waste_per_cap, y = plastic_waste_per_cap)) + 
-  geom_point()
+  geom_point() + 
+  labs(title = "Plastic waste per capita vs. mismanaged plastic waste per capita")
 ```
 
 ##### 4.1 Description of relationship (scatterplot of relationship between plastic waste per capita and mismanaged plastic waste per capita)
@@ -108,7 +127,8 @@ This scatterplot shows a weak, positive linear relationship between plastic wast
 
 ```{r plastic-waste-mismanaged-continent}
 ggplot(plastic_waste, aes(x = mismanaged_plastic_waste_per_cap, y = plastic_waste_per_cap, color = continent)) + 
-  geom_point()
+  geom_point() + 
+  labs(title = "Plastic waste per capita vs. mismanaged plastic waste per capita")
 ```
 
 ##### 4.2 Distinctions between continents with how plastic waste per capita and mismanaged plastic waste per capita are associated
@@ -119,7 +139,8 @@ It seems that there is a stronger linear relationship for Africa compared to oth
 
 ```{r plastic-waste-population-total}
 ggplot(plastic_waste, aes(x = total_pop, y = plastic_waste_per_cap, color = continent)) + 
-  geom_point()
+  geom_point() + 
+  labs(title = "Plastic waste per capita vs. total population")
 ```
 
 #### 4.3 Relationship between plastic waste per capita and coastal population
@@ -127,6 +148,7 @@ ggplot(plastic_waste, aes(x = total_pop, y = plastic_waste_per_cap, color = cont
 ```{r plastic-waste-population-coastal}
 ggplot(plastic_waste, aes(x = coastal_pop , y = plastic_waste_per_cap, color = continent)) + 
   geom_point()
+  labs(title = "Plastic waste per capita vs. coastal population")
 ```
 
 ##### 4.3 
@@ -134,7 +156,6 @@ The relationship between plastic waste per capita and total population and the r
 
 ### Exercise 5
 
-Remove this text, and add your answer for Exercise 5 here.
 
 ```{r recreate-viz}
 plastic_waste %>%
@@ -149,6 +170,7 @@ ggplot(plastic_waste, aes(x = (coastal_pop/total_pop), y =plastic_waste_per_cap)
   geom_smooth(method = "loess", col = "black")
 ```
 
+##### 5.1 Overall there is a weak positive association between plastic waste per capita and coastal population proportion. It appears that as there is a higher density of popualtion at the coast, there is in increase in plastic waste per capita. It may be that people who reside on the coast are more likely to consume more single-use plastic.  
 
 ### References
 
