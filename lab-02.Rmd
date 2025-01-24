@@ -38,7 +38,7 @@ ggplot(plastic_waste, aes(x=plastic_waste_per_cap)) +
   facet_wrap(~continent)
 ```
 
-#### Continent comparison of plastic waster per capita
+##### Continent comparison of plastic waster per capita
 Surprisingly it seems like the continents all share similar patterns except for South America which appears to have a drastically smaller plastic waste per capita. 
 
 ### Exercise 2
@@ -65,7 +65,7 @@ ggplot(data = plastic_waste, mapping = aes(x = plastic_waste_per_cap, color = co
   geom_density(alpha = .25)
 ```
 
-#### 2.1 Definition of color and fill by mapping aesthetics and definition of alpha levels as characteristic of plotting geom. 
+##### 2.1 Definition of color and fill by mapping aesthetics and definition of alpha levels as characteristic of plotting geom. 
 
 We defined color and fill as mapping aesthetics because we wanted the color and fill to be based on the values of a variable in the data, in this case continent. We defined alpha levels as characteristics of plotting geom because we wanted to modify how transparent the points were from 0-totally transparent to 1-totally solid. The alpha values were therefore not based on the values of a variable in the data so we defined the alpha level as a characteristic of the plotting geom.
 
@@ -79,7 +79,6 @@ ggplot(data = plastic_waste,mapping = aes(x = continent, y = plastic_waste_per_c
 
 
 
-
 #### 3.1 Convert side-by-side box plots to violin plots
 
 ```{r plastic-waste-violin}
@@ -87,36 +86,67 @@ ggplot(plastic_waste, aes(x = continent, y=plastic_waste_per_cap))+
   geom_violin()
 ```
 
-#### Violin plots compared to box plots 
+##### Violin plots compared to box plots 
 In addition to reflecting summary statistics like the box plots, a unique feature of violin plots is that you can see the density of each variable (similar to a flipped histogram). Rather than showing bars to represent the data, the distribution itself is plotted turned. So if you look at the violin plot of South America you can see that the data is densest near the 0 plastic waste per capita.        
 
-#### Features of box plots not displayed in violin plots 
+##### Features of box plots not displayed in violin plots 
 In contrast to violin plots, box plots display the specific values of the summary statistics like the quartiles, median, and clearly distinguish outliers. The line inside the box represents the median value, and the bottom horizontal edge of the box represents the first quartile and the top horizontal edge of the box represents the third quartile.     
 
 ### Exercise 4
 
-```{r plastic-waste-mismanaged}
-# insert code here
+#### 4.1 Visualize relationship between plastic waste per capita and mismanaged plastic waste per capital with a scatterplot
+```{r plastic-waste-mismanaged-scatterplot}
+ggplot(plastic_waste, aes(x = mismanaged_plastic_waste_per_cap, y = plastic_waste_per_cap)) + 
+  geom_point()
 ```
+
+##### 4.1 Description of relationship (scatterplot of relationship between plastic waste per capita and mismanaged plastic waste per capita)
+
+This scatterplot shows a weak, positive linear relationship between plastic waste per capita and mismanaged plastic waste per capita and one clear outlier in the data. 
+
+#### 4.2 Color scatterplot points by continent 
 
 ```{r plastic-waste-mismanaged-continent}
-# insert code here
+ggplot(plastic_waste, aes(x = mismanaged_plastic_waste_per_cap, y = plastic_waste_per_cap, color = continent)) + 
+  geom_point()
 ```
+
+##### 4.2 Distinctions between continents with how plastic waste per capita and mismanaged plastic waste per capita are associated
+
+It seems that there is a stronger linear relationship for Africa compared to other countries. For example it seems as though North America has weaker association.  
+
+#### 4.3 Relationship between plastic waste per capita and total population
 
 ```{r plastic-waste-population-total}
-# insert code here
+ggplot(plastic_waste, aes(x = total_pop, y = plastic_waste_per_cap, color = continent)) + 
+  geom_point()
 ```
 
+#### 4.3 Relationship between plastic waste per capita and coastal population
+
 ```{r plastic-waste-population-coastal}
-# insert code here
+ggplot(plastic_waste, aes(x = coastal_pop , y = plastic_waste_per_cap, color = continent)) + 
+  geom_point()
 ```
+
+##### 4.3 
+The relationship between plastic waste per capita and total population and the relationship between plastic waste per capita and coastal population appear to be similiarly linearly associated. I would say that one is not more strongly linearly associated than the other. 
 
 ### Exercise 5
 
 Remove this text, and add your answer for Exercise 5 here.
 
 ```{r recreate-viz}
-# insert code here
+plastic_waste %>%
+  filter(plastic_waste_per_cap > 3.0)
+
+ggplot(plastic_waste, aes(x = (coastal_pop/total_pop), y =plastic_waste_per_cap)) + 
+  geom_point(aes(color = continent)) +
+  xlim(0, 1.75) + 
+  ylim(0, 0.7) + 
+  labs(title = "Plastic waste vs. coastal population proportion", subtitle = "by continent", x = "Coastal population proportion (Coastal/total population)", y = "Plastic waste per capita") +
+  scale_color_viridis_d() + 
+  geom_smooth(method = "loess", col = "black")
 ```
 
 
