@@ -3,6 +3,15 @@ Lab 02 - Plastic waste
 Lilly McClendon
 2025-01-23
 
+## Warm Up
+
+In R Studio there is the Source (where code is written, run, and outputs
+appear), Console (shows what has been executed and errors), Environment
+(shows data), and Files (files in the folder that the project is saved
+in). In the plastic_waste dataset there are 240 observations of 10
+different variables. NA reflects that the particular value is missing
+for that cell.
+
 ## Load packages and data
 
 ``` r
@@ -307,7 +316,13 @@ ggplot(plastic_waste, aes(x = (coastal_pop/total_pop), y =plastic_waste_per_cap)
 
 ![](lab-02_files/figure-gfm/recreate-viz-1.png)<!-- -->
 
-##### 5.1 Overall there is a weak positive association between plastic waste per capita and coastal population proportion. It appears that as there is a higher density of popualtion at the coast, there is in increase in plastic waste per capita. It may be that people who reside on the coast are more likely to consume more single-use plastic.
+##### 5.1 Interpretation
+
+Overall there is a weak positive association between plastic waste per
+capita and coastal population proportion. It appears that as there is a
+higher density of popualtion at the coast, there is in increase in
+plastic waste per capita. It may be that people who reside on the coast
+are more likely to consume more single-use plastic.
 
 ### References
 
